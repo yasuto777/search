@@ -1,10 +1,11 @@
 package main
 
 import (
-	// "fmt"
+	"fmt"
 	"os"
 
 	flags "github.com/jessevdk/go-flags"
+	"./optr"
 )
 
 const version = "0.9"
@@ -20,10 +21,20 @@ func main() {
 	parser.Name = "search"
 	parser.Usage = "[OPTIONS] PATTERN [PATH]"
 
-	args, _ := parser.Parse()
+	args, err := parser.Parse()
+	if err != nil {
+		fmt.Println("Error")
+		os.Exit(1)
+	}
 
 	if len(args) == 0 {
 		parser.WriteHelp(os.Stdout)
 		os.Exit(1)
 	}
+
+	if opts.Recursion {
+		// -r option
+		optr.Roption()
+	}
+
 }
